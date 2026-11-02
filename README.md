@@ -9,6 +9,8 @@ reception of each serve is graded too. Score, serving team and rotation are trac
 Stack: Next.js 16 (App Router), TypeScript, Tailwind v4, Supabase (auth + Postgres).
 Interface in Norwegian and English.
 
+# Supabase database: fawBXlJZOpwDwK6W
+
 ## 1. Set up Supabase
 
 1. Create a free project at <https://supabase.com>.
