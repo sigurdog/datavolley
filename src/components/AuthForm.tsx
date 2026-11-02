@@ -4,10 +4,11 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { devAdminLogin } from "@/app/actions/auth";
 import { useT } from "@/lib/i18n/context";
 import { LocaleToggle } from "./LocaleToggle";
 
-export function AuthForm({ mode }: { mode: "login" | "signup" }) {
+export function AuthForm({ mode, devAdmin = false }: { mode: "login" | "signup"; devAdmin?: boolean }) {
   const { t } = useT();
   const router = useRouter();
   const params = useSearchParams();
@@ -25,6 +26,18 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
     const supabase = createClient();
 
     if (mode === "login") {
+      // Dev-only: username "admin" (no @) goes through the server-side shortcut.
+      if (devAdmin && !email.includes("@")) {
+        const res = await devAdminLogin(email, password);
+        if (res.error) {
+          setError(res.error);
+          setBusy(false);
+          return;
+        }
+        router.replace(params.get("next") || "/dashboard");
+        router.refresh();
+        return;
+      }
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) {
         setError(error.message);
@@ -70,8 +83,8 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           {t("auth_email")}
           <input
             className="input"
-            type="email"
-            autoComplete="email"
+            type={devAdmin && mode === "login" ? "text" : "email"}
+            autoComplete={devAdmin && mode === "login" ? "username" : "email"}
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -95,6 +108,9 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
         <button className="btn btn-primary" disabled={busy} type="submit">
           {mode === "login" ? t("auth_login") : t("auth_signup")}
         </button>
+        {devAdmin && mode === "login" && (
+          <p className="text-xs text-muted">{t("auth_devAdminHint")}</p>
+        )}
       </form>
 
       <p className="text-center text-sm text-muted">

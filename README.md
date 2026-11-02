@@ -32,6 +32,20 @@ npm run dev
 Open <http://localhost:3000>, create an account, create your club, add teams and players, create a
 match and start scouting.
 
+### Dev admin login (admin / admin)
+
+Sign-up normally requires confirming an email. For local development you can seed an admin user
+instead:
+
+1. Copy the **service_role** key from Project Settings → API into `.env.local` as
+   `SUPABASE_SERVICE_ROLE_KEY` (secret, server-side only).
+2. Run `npm run seed:admin`. It creates `admin@datavolley.local` with the email pre-confirmed and
+   writes `DEV_ADMIN_*` values to `.env.local`.
+3. Restart `npm run dev` and log in with username `admin`, password `admin`.
+
+The shortcut only exists when `NODE_ENV` is not production and `DEV_ADMIN_ENABLED=true`, so it is
+inert in a deployed build.
+
 Other scripts:
 
 ```bash

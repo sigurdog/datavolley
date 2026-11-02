@@ -20,6 +20,7 @@ const en = {
   auth_haveAccount: "Already have an account?",
   auth_checkEmail: "Check your email to confirm your account, then log in.",
   auth_minPassword: "At least 6 characters",
+  auth_devAdminHint: "Development: log in with username admin and password admin.",
 
   // setup
   setup_title: "Supabase is not configured",
@@ -218,6 +219,7 @@ const nb: Dictionary = {
   auth_haveAccount: "Har du allerede konto?",
   auth_checkEmail: "Sjekk e-posten din for å bekrefte kontoen, og logg deretter inn.",
   auth_minPassword: "Minst 6 tegn",
+  auth_devAdminHint: "Utvikling: logg inn med brukernavn admin og passord admin.",
 
   setup_title: "Supabase er ikke satt opp",
   setup_body:
