@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #f6f7f9;
+  --color-surface: #ffffff;
+  --color-surface-2: #eef0f3;
+  --color-border: #d9dde3;
+  --color-fg: #111418;
+  --color-muted: #5f6673;
+  --color-home: #1d4ed8;
+  --color-home-soft: #dbe5ff;
+  --color-away: #c2410c;
+  --color-away-soft: #ffe4d6;
+  --color-good: #15803d;
+  --color-good-soft: #dcfce7;
+  --color-mid: #a16207;
+  --color-mid-soft: #fef3c7;
+  --color-bad: #b91c1c;
+  --color-bad-soft: #fee2e2;
+  --color-accent: #0f766e;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f1216;
+    --color-surface: #171b21;
+    --color-surface-2: #1f242c;
+    --color-border: #2c333d;
+    --color-fg: #eef1f5;
+    --color-muted: #9aa3b0;
+    --color-home: #60a5fa;
+    --color-home-soft: #1e2f55;
+    --color-away: #fb923c;
+    --color-away-soft: #4a2a14;
+    --color-good: #4ade80;
+    --color-good-soft: #14321f;
+    --color-mid: #fbbf24;
+    --color-mid-soft: #3b2f0d;
+    --color-bad: #f87171;
+    --color-bad-soft: #3f1515;
+    --color-accent: #2dd4bf;
+  }
+}
+
+html {
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Big touch targets for the scouting screen */
+.tap {
+  @apply select-none rounded-xl border border-border bg-surface px-3 py-3 text-center font-semibold shadow-sm transition active:scale-[0.98] disabled:opacity-40;
+  min-height: 3.25rem;
+  touch-action: manipulation;
+}
+.tap:hover:not(:disabled) {
+  filter: brightness(0.97);
+}
+@media (prefers-color-scheme: dark) {
+  .tap:hover:not(:disabled) {
+    filter: brightness(1.15);
+  }
+}
+
+.input {
+  @apply w-full rounded-lg border border-border bg-surface px-3 py-2 text-fg outline-none focus:ring-2 focus:ring-accent;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 font-medium shadow-sm transition hover:brightness-95 disabled:opacity-50;
+}
+.btn-primary {
+  @apply border-transparent bg-accent text-white hover:brightness-110;
+}
+.btn-danger {
+  @apply border-transparent bg-bad text-white hover:brightness-110;
+}
+
+.card {
+  @apply rounded-2xl border border-border bg-surface p-4 shadow-sm;
+}
+
+.kbd {
+  @apply rounded border border-border bg-surface-2 px-1.5 py-0.5 font-mono text-xs text-muted;
+}
