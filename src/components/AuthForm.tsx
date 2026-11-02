@@ -97,7 +97,7 @@ export function AuthForm({ mode, devAdmin = false }: { mode: "login" | "signup";
             type="password"
             autoComplete={mode === "login" ? "current-password" : "new-password"}
             required
-            minLength={6}
+            minLength={mode === "signup" ? 6 : undefined}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder={mode === "signup" ? t("auth_minPassword") : undefined}
